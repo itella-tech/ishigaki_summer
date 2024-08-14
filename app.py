@@ -67,9 +67,10 @@ with tab1:
     # 入力フィールドの追加
     query = st.text_input('プロンプト')
 
-    if st.button('Run Workflow'):
+    if st.button('生成する'):
         inputs = {
             'query': query,
+            'type': 'image'
         }
         with st.spinner("ワークフローを実行中..."):
             response = execute_workflow_streaming(api_key, inputs, st.session_state.user_id)
@@ -81,15 +82,21 @@ with tab2:
     st.header("画像生成")
     image_prompt = st.text_input('画像生成プロンプト')
     
-    if st.button('Generate Image'):
+    if st.button('生成する'):
         inputs = {
-            'prompt': image_prompt,
+            'query': image_prompt,
+            'type': 'image'
         }
         with st.spinner("画像を生成中..."):
             response = execute_workflow_streaming(api_key, inputs, st.session_state.user_id)
             if response and 'outputs' in response:
                 st.write("画像生成結果:")
-                if 'image_url' in response['outputs']:
-                    st.image(response['outputs']['image_url'])
+                print(response['outputs'])
+                if 'json' in response['outputs']:
+                    image_data = response['outputs']['json'][0]
+                    if image_data['type'] == 'image' and 'url' in image_data:
+                        st.image(image_data['url'])
+                    else:
+                        st.write("画像データが正しい形式ではありません。")
                 else:
-                    st.write("画像URLが見つかりません。")
+                    st.write("画像データが見つかりません。")
