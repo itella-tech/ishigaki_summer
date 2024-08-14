@@ -3,6 +3,8 @@ import streamlit as st
 import json
 import os
 import uuid
+# API keyを環境変数から取得
+from dotenv import load_dotenv
 
 def get_workflows(api_key):
     url = 'https://api.dify.ai/v1/workflows'
@@ -51,7 +53,7 @@ def execute_workflow_streaming(api_key, inputs, user_id):
 # Streamlitアプリケーションの設定
 st.title('Dify Workflow Runner')
 
-# API keyを環境変数から取得
+load_dotenv()
 api_key = os.environ.get('DIFY_API_KEY')
 if not api_key:
     api_key = 'app-xxx'  # デフォルトのAPI key
