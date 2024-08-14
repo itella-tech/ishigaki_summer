@@ -70,7 +70,6 @@ with tab1:
     if st.button('生成する', key="text_generate"):  # キーを追加
         inputs = {
             'query': query,
-            'type': 'image'
         }
         with st.spinner("ワークフローを実行中..."):
             response = execute_workflow_streaming(api_key, inputs, st.session_state.user_id)
