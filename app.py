@@ -49,7 +49,7 @@ def execute_workflow_streaming(api_key, inputs, user_id):
         return None
 
 # Streamlitアプリケーションの設定
-st.title('Dify Workflow Runner')
+st.title('夏休みデジタル教室')
 
 api_key = os.environ.get('DIFY_API_KEY')
 if not api_key:
