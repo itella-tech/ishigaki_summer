@@ -67,7 +67,7 @@ with tab1:
     # 入力フィールドの追加
     query = st.text_input('プロンプト')
 
-    if st.button('生成する'):
+    if st.button('生成する', key="text_generate"):  # キーを追加
         inputs = {
             'query': query,
             'type': 'image'
@@ -82,7 +82,7 @@ with tab2:
     st.header("画像生成")
     image_prompt = st.text_input('画像生成プロンプト')
     
-    if st.button('生成する'):
+    if st.button('生成する', key="image_generate"):  # キーを追加
         inputs = {
             'query': image_prompt,
             'type': 'image'
